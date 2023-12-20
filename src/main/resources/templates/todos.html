@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+    <title>List of Todos</title>
+</head>
+
+<body>
+    <div class="container mt-5">
+
+        <form class="w-50" th:action="@{/todos/create}" method="post" th:object="${todo}">
+            <h1>Create a Todo</h1>
+            <!-- <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" /> -->
+            <div class="mb-3">
+                <label for="todoname" class="form-label">Todo Name</label>
+                <input type="text" name="name" class="form-control" id="todoname" th:field="*{name}">
+            </div>
+            <button type="submit" class="btn btn-primary">Create</button>
+        </form>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="todo : ${todos}">
+                    <th scope="row" th:text="${todo.id}"></th>
+                    <td th:text="${todo.name}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</body>
+
+</html>
